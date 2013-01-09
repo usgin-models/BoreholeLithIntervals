@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/bhlithinterval/0.9" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/bhlithinterval/0.9" elementFormDefault="qualified" version="1.05">
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
+	<xs:annotation>
+		<!-- This XSD document, including XML schema, indicates the content requested for AASG geothermal data interoperable web services for description of intervals collected from boreholes, either for a simple well (one wellbore), complex well (multiple wellbores), or a single well bore in a complex well. In the geothermal data system, borehole interval features are one of the sampling feature services that are used as a method to discover resources derived from boreholes with particular characteristics. Each borehole should have a unique HeaderURI.-->
+		<!--This XSD document was created on 2012-24-02 by Celia Coleman, AZGS.  This schema is based on the data available in the AASG Web Feature Services created for borehole intervals in Oklahoma. -->
+		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
+			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+			<gmlsf:GMLProfileSchema>
+http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gmlsf:GMLProfileSchema>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="BoreholeLithInterval" type="aasg:BoreholeLithIntervalType" substitutionGroup="gml:_Feature"/>
+	<xs:complexType name="BoreholeLithIntervalType">
+		<xs:complexContent>
+			<xs:extension base="gml:AbstractFeatureType">
+				<xs:sequence>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="BHIntervalURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="WellName" type="xs:string"/>
+					<xs:element name="APINo" type="xs:string" minOccurs="0"/>
+					<xs:element name="OtherID" type="xs:string" minOccurs="0"/>
+					<xs:element name="OtherName" type="xs:string" minOccurs="0"/>
+					<xs:element name="BoreholeName" type="xs:string" minOccurs="0"/>
+					<xs:element name="Label" type="xs:string"/>
+					<xs:element name="ParentWellURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="HeaderURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="SpudDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="EndedDrillingDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="DrillingMethod" type="xs:string" minOccurs="0"/>
+					<xs:element name="WellType" type="xs:string"/>
+					<xs:element name="Status" type="xs:string" minOccurs="0"/>
+					<xs:element name="StatusDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="IntervalName" type="xs:string"/>
+					<xs:element name="Description" type="xs:string" minOccurs="0"/>
+					<xs:element name="IntervalType" type="xs:string"/>
+					<xs:element name="County" type="xs:string"/>
+					<xs:element name="State" type="xs:string"/>
+					<xs:element name="LocationName" type="xs:string" minOccurs="0"/>
+					<xs:element name="LatDegree" type="xs:double"/>
+					<xs:element name="LongDegree" type="xs:double"/>
+					<xs:element name="SRS" type="xs:string"/>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
+					<xs:element name="DepthTopInterval" type="xs:double"/>
+					<xs:element name="DepthBottomInterval" type="xs:double"/>
+					<xs:element name="DepthReferencePoint" type="xs:string" minOccurs="0"/>
+					<xs:element name="ElevationGL" type="xs:double"/>
+					<xs:element name="LengthUnits" type="xs:string"/>
+					<xs:element name="WellBoreShape" type="xs:string" minOccurs="0"/>
+					<xs:element name="TrueVerticalDepth" type="xs:double" minOccurs="0"/>
+					<xs:element name="Permeability" type="xs:double" minOccurs="0"/>
+					<xs:element name="UnitsPermeability" type="xs:string" minOccurs="0"/>
+					<xs:element name="Porosity" type="xs:double" minOccurs="0"/>
+					<xs:element name="UnitsPorosity" type="xs:string" minOccurs="0"/>
+					<xs:element name="ObservationMethod" type="xs:string" minOccurs="0"/>
+					<xs:element name="GeologicUnitName" type="xs:string"/>
+					<xs:element name="SpecificationURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="GeologicHistory" type="xs:string" minOccurs="0"/>
+					<xs:element name="RepresentativeAgeURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="YoungerAgeURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="OlderAgeURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Rank" type="xs:string" minOccurs="0"/>
+					<xs:element name="Lithology" type="xs:string" minOccurs="0"/>
+					<xs:element name="RepresentativeLithologyURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
+					<xs:element name="Source" type="xs:string"/>
+					<xs:element name="MetadataURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
