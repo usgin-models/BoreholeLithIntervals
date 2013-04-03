@@ -1,0 +1,6 @@
+This repository contains document artifacts for an inforamtion exchange for borehole lithology interval observations. The artifacts include an Excel Workbook that defines and documents the content model, and an XML schema that implements the model.
+
+The Excel workbook contains the BoreholeLithIntervalTemplate spreadsheet that specifies content elements for an interchange format for lithology log intervals associated with a borehole. Fields in the BoreholeLithIntervalTemplate will become XML elements in interchange documents for WFS simple features served by AASG geothermal data web services.  Each interval feature has a top and a bottom, measured from the ground surface (convention for interoperability) and a geologic unit description that will be identical with the content associated with polygons on a geologic map.  Other sheets in the workbook provide additional explanatory material and provide information on the origin of the dataset, its review and lineage.
+
+
+Services are currently deployed using the tagged 0.9 version of this information exchange.
