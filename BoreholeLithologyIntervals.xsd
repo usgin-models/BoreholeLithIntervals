@@ -4,7 +4,7 @@
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
 		<!-- This XSD document, including XML schema, indicates the content requested for AASG geothermal data interoperable web services for description of intervals collected from boreholes, either for a simple well (one wellbore), complex well (multiple wellbores), or a single well bore in a complex well. In the geothermal data system, borehole interval features are one of the sampling feature services that are used as a method to discover resources derived from boreholes with particular characteristics. Each borehole should have a unique HeaderURI.-->
-		<!--This XSD document was created on 2012-24-02 by Celia Coleman, AZGS.  This schema is based on the data available in the AASG Web Feature Services created for borehole intervals in Oklahoma. -->
+		<!--This XSD document was created on 2012-24-02 by Celia Coleman, AZGS, and edited to include descriptive annotation by Christy Caudill 2013-04-10  This schema is based on the data available in the AASG Web Feature Services created for borehole intervals in Oklahoma. -->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -16,21 +16,55 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 		<xs:complexContent>
 			<xs:extension base="gml:AbstractFeatureType">
 				<xs:sequence>
-					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Integer record count, added by ArcGIS servers during service deployment; not required but cannot be removed when deploying from ArcGIS feature class. Not user maintained, so this element appears in XML implementation but not in the WellHeaderTemplate.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="BHIntervalURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for the borehole interval described by the elements in this table.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="WellName" type="xs:string"/>
-					<xs:element name="APINo" type="xs:string" minOccurs="0"/>
-					<xs:element name="OtherID" type="xs:string" minOccurs="0"/>
-					<xs:element name="OtherName" type="xs:string" minOccurs="0"/>
-					<xs:element name="BoreholeName" type="xs:string" minOccurs="0"/>
-					<xs:element name="Label" type="xs:string"/>
+					<xs:element name="WellName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The human-intelligible name for the well comprising the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="APINo" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>API number for the the wellbore/borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OtherID" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Alternative identifier(s) for the borehole. In the absence of an API number, if an OtherID is available, it should be used in the construction of the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OtherName" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Other names for the well that contains the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BoreholeName" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The human-intelligible name of the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Label" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The map label for the feature.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="ParentWellURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The unique identifier for the well that contains the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
@@ -38,50 +72,181 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 						</xs:simpleType>
 					</xs:element>
 					<xs:element name="HeaderURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for the borehole described by the elements in this table.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="SpudDate" type="xs:string" minOccurs="0"/>
-					<xs:element name="EndedDrillingDate" type="xs:string" minOccurs="0"/>
-					<xs:element name="DrillingMethod" type="xs:string" minOccurs="0"/>
-					<xs:element name="WellType" type="xs:string"/>
-					<xs:element name="Status" type="xs:string" minOccurs="0"/>
-					<xs:element name="StatusDate" type="xs:string" minOccurs="0"/>
-					<xs:element name="IntervalName" type="xs:string"/>
-					<xs:element name="Description" type="xs:string" minOccurs="0"/>
-					<xs:element name="IntervalType" type="xs:string"/>
-					<xs:element name="County" type="xs:string"/>
-					<xs:element name="State" type="xs:string"/>
-					<xs:element name="LocationName" type="xs:string" minOccurs="0"/>
-					<xs:element name="LatDegree" type="xs:double"/>
-					<xs:element name="LongDegree" type="xs:double"/>
-					<xs:element name="SRS" type="xs:string"/>
-					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
-					<xs:element name="DepthTopInterval" type="xs:double"/>
-					<xs:element name="DepthBottomInterval" type="xs:double"/>
-					<xs:element name="DepthReferencePoint" type="xs:string" minOccurs="0"/>
-					<xs:element name="ElevationGL" type="xs:double"/>
-					<xs:element name="LengthUnits" type="xs:string"/>
-					<xs:element name="WellBoreShape" type="xs:string" minOccurs="0"/>
-					<xs:element name="TrueVerticalDepth" type="xs:double" minOccurs="0"/>
-					<xs:element name="Permeability" type="xs:double" minOccurs="0"/>
-					<xs:element name="UnitsPermeability" type="xs:string" minOccurs="0"/>
-					<xs:element name="Porosity" type="xs:double" minOccurs="0"/>
-					<xs:element name="UnitsPorosity" type="xs:string" minOccurs="0"/>
-					<xs:element name="ObservationMethod" type="xs:string" minOccurs="0"/>
-					<xs:element name="GeologicUnitName" type="xs:string"/>
+					<xs:element name="SpudDate" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date on which spudding commenced for the well that contains the borehole identified by the HeaderURI.  </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EndedDrillingDate" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Date on which drilling ended for the well that contains the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DrillingMethod" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Basic drilling technology used in the creation of the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="WellType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Type of well that contains the borehole identified by the HeaderURI, at the time indicated in the StatusDate element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Status" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The status of the well that contains the borehole identified by the HeaderURI, at the time indicated in the StatusDate element.
+</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="StatusDate" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The date of the status indicated in the Status field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IntervalName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Required name given to the interval represented by this record.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Description" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Free text description of material in this lithology interval. This is considered mandatory, the simplest and minimum amount of information necessary to define why this interval is differentiated from other adjacent intervals in the borehole.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="IntervalType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The interval type based on the method used to collect the measurement of the borehole interval.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="County" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Name of county in which the borehole identified by the HeaderURI is located.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="State" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Name of state in which the borehole identified by the HeaderURI is located.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocationName" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Name of field or other location name in which the well that contains the borehole interval, identified by the HeaderURI, is located.
+</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LatDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Latitude measurement for the surface location of the well that contains the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LongDegree" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Longitude measurement for the surface location of the well that contains the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SRS" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The spatial reference system.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Free text statement describing the uncertainty of the coordinates of the origin of the well that contains the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthTopInterval" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Top of borehole interval identified by the BHIntervalURI, from borehole origin to top of borehole interval.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthBottomInterval" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Depth to the bottom of the borehole interval identified by the BHIntervalURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthReferencePoint" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The depth reference point should be a surveyed elevation at the ground surface from which all depths are referenced.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ElevationGL" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Elevation at ground level for the origin of the well that contains the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LengthUnits" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Units used to report all elevation and depth information.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="WellBoreShape" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Term used to indicate the overall shape of the borehole identified by the HeaderURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="TrueVerticalDepth" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Vertical distance from bottom hole point to elevation of borehole origin.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Permeability" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The measure of a material's ability to allow fluid to pass thorough it.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UnitsPermeability" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Units of permeability.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Porosity" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Porosity as a ratio or a percentage.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UnitsPorosity" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Units of porosity.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ObservationMethod" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The observation method for the borehole interval.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="GeologicUnitName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Name of the geologic unit within the borehole interval identified by the BHIntervalURI.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="SpecificationURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This URI could refer to a GeoSciML feature that describes the instance in detail.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="GeologicHistory" type="xs:string" minOccurs="0"/>
+					<xs:element name="GeologicHistory" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Free text specifying age of feature.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="RepresentativeAgeURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI for a named time era that best characterizes the age of the fault.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
@@ -89,6 +254,9 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 						</xs:simpleType>
 					</xs:element>
 					<xs:element name="YoungerAgeURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI for younger age bound for genesis of structure.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
@@ -96,31 +264,60 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 						</xs:simpleType>
 					</xs:element>
 					<xs:element name="OlderAgeURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI for older age bound for genesis of structure.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="Rank" type="xs:string" minOccurs="0"/>
-					<xs:element name="Lithology" type="xs:string" minOccurs="0"/>
+					<xs:element name="Rank" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Characterization of the rank of the intercal described.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Lithology" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Composition of the mapped unit in terms of rock types from the standard lithology vocabulary, along with a proportion value for each constituent.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="RepresentativeLithologyURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Identifier for a category in a lithology generalization scheme for use in harmonized lithologic portrayal</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
-					<xs:element name="Source" type="xs:string"/>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This is a text listing of logs, samples, chemical analyses that are associated with this well.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Source" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Original source of the data.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="MetadataURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI referring to a metadata record describing the provenance of data.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:element name="Shape" type="gml:PointPropertyType">
+						<xs:annotation>
+							<xs:documentation>Added by GIS for WFS service; this element appears in the xml output, but is generated during service deployment from the latitude and longitude, therefore it doesn't appear in the template.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
